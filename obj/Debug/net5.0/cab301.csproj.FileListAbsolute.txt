@@ -1,0 +1,15 @@
+/Users/frank/Desktop/cab301/bin/Debug/net5.0/cab301.deps.json
+/Users/frank/Desktop/cab301/bin/Debug/net5.0/cab301.runtimeconfig.json
+/Users/frank/Desktop/cab301/bin/Debug/net5.0/cab301.runtimeconfig.dev.json
+/Users/frank/Desktop/cab301/bin/Debug/net5.0/cab301.dll
+/Users/frank/Desktop/cab301/bin/Debug/net5.0/ref/cab301.dll
+/Users/frank/Desktop/cab301/bin/Debug/net5.0/cab301.pdb
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.csprojAssemblyReference.cache
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.GeneratedMSBuildEditorConfig.editorconfig
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.AssemblyInfoInputs.cache
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.AssemblyInfo.cs
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.csproj.CoreCompileInputs.cache
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.dll
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/ref/cab301.dll
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.pdb
+/Users/frank/Desktop/cab301/obj/Debug/net5.0/cab301.genruntimeconfig.cache
