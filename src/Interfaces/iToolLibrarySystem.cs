@@ -18,14 +18,15 @@ namespace cab301
 
         void delete(iMember aMember); //delete a member from the system
 
-        void displayBorrowingTools(iMember aMember); //given a member, display all the tools that the member are currently renting
+        void displayBorrowingTools(); //given a member, display all the tools that the member are currently renting
 
         //this is modified as tool type is kept as a local state
         void displayTools(); // display all the tools of a tool type selected by a member
 
-        void borrowTool(iMember aMember, iTool aTool); //a member borrows a tool from the tool library
+        //these are modified to not have member in the parameter since current member is always stored
+        void borrowTool(iTool aTool); //a member borrows a tool from the tool library
 
-        void returnTool(iMember aMember, iTool aTool); //a member return a tool to the tool library
+        void returnTool(iTool aTool); //a member return a tool to the tool library
 
         string[] listTools(iMember aMember); //get a list of tools that are currently held by a given member
 

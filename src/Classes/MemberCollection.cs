@@ -22,9 +22,9 @@ namespace cab301 {
             number --;
         }
 
-        public iMember search (iMember member) {
+        public Member search (iMember member) {
 			//forgive these unsightly casts, they're to make up my inability to make generics work..
-            return (iMember)membersTree.Search(member);
+            return (Member)membersTree.Search(member);
         }  
 
         public iMember[] toArray() {

@@ -199,10 +199,92 @@ namespace cab301 {
         private void memberResults () {
             Console.WriteLine("Press any key to go back");
             Console.ReadKey();
+            memberMenu();
         }
 
         private void member() {
+            try {
+                memberLogin();
+            } catch (Exception) {
+                Console.WriteLine("Log in failed, try again!");
+                memberLogin();
+            }
+        }
 
+        private void memberLogin() {
+            library.logIn();
+            memberMenu();
+        }
+
+        private void memberMenu() {
+            Console.WriteLine(@"
+            Welcome to the Tool Library
+            =========Member Menu=============
+            1. Display all the tools of a tool type
+            2. Borrow a tool
+            3. Return a tool
+            4. List all the tools that I am renting
+            5. Display top three (3) most frequently rented tools
+            0. Return to main menu
+            ===================================
+
+            Please make a selection:
+            ");
+            int selection = 0;
+            try {
+                selection = Convert.ToInt16(Console.ReadLine());
+            } catch (Exception) {
+                memberMenu();
+            }
+            switch (selection){
+                case 1:
+                    library.selectCollection();
+                    library.displayTools();
+                    memberResults();
+                    break;
+                case 2:
+                    try {
+                        library.selectCollection();
+                        library.displayTools();
+                        Console.WriteLine("Please enter the tool name you wish to borrow: ");
+                        string entered = Convert.ToString(Console.ReadLine());
+                        library.borrowTool(new Tool(entered));
+                        memberResults();
+                    } catch (Exception) {
+                        Console.WriteLine("Action failed, try again!");
+                        memberResults();
+                    }
+                    break;
+                case 3:
+                    try {
+                        library.selectCollection();
+                        library.displayBorrowingTools();
+                        Console.WriteLine("Please enter the tool you wish to return");
+                        string entered = Convert.ToString(Console.ReadLine());
+                        library.returnTool(new Tool(entered));
+                        memberResults();
+                    } catch (Exception) {
+                        Console.WriteLine("Action failed, try again!");
+                        memberResults();
+                    }
+                    break;
+                case 4:
+                    try {
+                        library.displayBorrowingTools();
+                        memberResults();
+                    } catch (Exception) {
+                        Console.WriteLine("Action failed, try again!");
+                        memberResults();
+                    }
+                    break;
+                case 0:
+                    level1();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Selection.");
+                    memberResults();
+                    break;
+            }
         }
     }
 }

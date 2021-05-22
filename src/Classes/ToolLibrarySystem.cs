@@ -83,8 +83,11 @@ namespace cab301 {
                 throw new Exception ("Member doesnt' exist");
             }
         }
-        public void displayBorrowingTools (iMember member) {
-
+        public void displayBorrowingTools () {
+            string[] tools = currentMember.Tools;
+            for (int i = 0; i < tools.Length; i++) {
+                Console.WriteLine(i.ToString() + ". " + tools[i]);
+            }
         }
         public void displayTools () {
             if (currentCollection == null) {
@@ -107,11 +110,36 @@ namespace cab301 {
                 Console.WriteLine("Contact Number of " + firstName + ": " + member.ContactNumber);
             }
         }
-        public void borrowTool (iMember member, iTool tool) {
-
+        public void borrowTool (iTool tool) {
+            currentMember.addTool(tool);
+            members.delete(currentMember);
+            members.add(currentMember);
+            iTool[] tools = currentCollection.toArray();
+            for (int i = 0; i < tools.Length; i++) {
+                if (tools[i].Name == tool.Name) {
+                    tool.AvailableQuantity = tools[i].AvailableQuantity - 1;
+                    tool.NoBorrowings = tools[i].NoBorrowings + 1;
+                    tool.addBorrower(currentMember);
+                }
+            }
+            //update the collection
+            currentCollection.delete(tool);
+            currentCollection.add(tool);
         }
-        public void returnTool (iMember member, iTool tool) {
-
+        public void returnTool (iTool tool) {
+            currentMember.deleteTool(tool);
+            members.delete(currentMember);
+            members.add(currentMember);
+            iTool[] tools = currentCollection.toArray();
+            for (int i = 0; i < tools.Length; i++) {
+                if (tools[i].Name == tool.Name) {
+                    tool.AvailableQuantity = tools[i].AvailableQuantity + 1;
+                    tool.deleteBorrower(currentMember);
+                }
+            }
+            //update the collection
+            currentCollection.delete(tool);
+            currentCollection.add(tool);
         }
         public string[] listTools (iMember member) {
             return new string[] {};
@@ -120,7 +148,23 @@ namespace cab301 {
 
         }
 
+        public void logIn() {
+            currentMember = null;
+            Console.WriteLine("What's your first name?");
+            string firstName = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("What's your last name?");
+            string lastName = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("What's your pin?");
+            string pin = Convert.ToString(Console.ReadLine());
+            Member stored = members.search(new Member(firstName, lastName, "", ""));
+            if (stored.PIN != pin) {
+                throw new Exception ("Wrong password");
+            }
+            currentMember = stored;
+        }
+
         //long and boring method adding tool collections to each tool category dictionary
+        //this is the most pain I've ever had in any assignment, and I've done some third year math units.
         private void initDictionaries () {
             String[] gardeningToolTypes = {"Line Trimmers", "Lawn Mowers", "Hand Tools", "Wheelbarrows", "Garden Power Tools"};
             foreach (String type in gardeningToolTypes)
@@ -139,21 +183,52 @@ namespace cab301 {
             {
                 fencingTools.Add(type, new ToolCollection());
             }
+
+            String[] measuringToolTypes = {"Distance Tools", "Laser Measure", "Measuring Jugs", "Temperature & Humidity Tools", "Levelling Tools"};
+            foreach (String type in measuringToolTypes)
+            {
+                measuringTools.Add(type, new ToolCollection());
+            }
+
+            String[] cleaningToolTypes = {"Draining", "Car Cleaning", "Vacuum", "Pressure Cleaners", "Pool Cleaning", "Floor Cleaning"};
+            foreach (String type in cleaningToolTypes) {
+                cleaningTools.Add(type, new ToolCollection());
+            }
+
+            String[] paintingToolTypes = {"Sanding Tools", "Brushes", "Rollers", "Paint Removal Tools", "Paint Scrapers", "Sprayers"};
+            foreach (String type in paintingToolTypes) {
+                paintingTools.Add(type, new ToolCollection());
+            }
+
+            String[] eletronicToolTypes = {"Voltage Tester", "Oscilloscopes", "Thermal Imaging", "Data Test Tool", "Insulation Testers"};
+            foreach (String type in eletronicToolTypes) {
+                electronicTools.Add(type, new ToolCollection());
+            }
+
+            String[] electricityToolTypes = {"Test Equipment", "Safety Equipment", "Basic Hand Tools", "Circuit Protection", "Cable Tools"};
+            foreach (String type in electricityToolTypes) {
+                electricityTools.Add(type, new ToolCollection());
+            }
+
+            String[] automotiveToolTypes = {"Jacks", "Air Compressors", "Battery Chargers", "Socket Tools", "Braking", "Drivetrain"};
+            foreach (String type in automotiveToolTypes) {
+                automotiveTools.Add(type, new ToolCollection());
+            }
         }
 
         //another long and boring method that gets user to select which tool type they're performing actions on
         public void selectCollection () {
             currentCollection = null;
             Console.Write(@"Select tool category:
-                    1. Gardening Tools
-                    2. Flooring Tools
-                    3. Fencing Tools
-                    4. Measuring Tools
-                    5. Cleaning Tools
-                    6. Painting Tools
-                    7. Electronic Tools
-                    8. Elecricity Tools
-                    9. Automotive Tools");
+1. Gardening Tools
+2. Flooring Tools
+3. Fencing Tools
+4. Measuring Tools
+5. Cleaning Tools
+6. Painting Tools
+7. Electronic Tools
+8. Elecricity Tools
+9. Automotive Tools");
             Console.Write("\nEnter your tool category number\n");
             int categorySelection = Convert.ToInt16(Console.ReadLine());
             String typeSelection;
@@ -180,7 +255,7 @@ namespace cab301 {
                         "\n6. Tiling Tools\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    flooringTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 3:
                     Console.Write("Select a tool type: " +
@@ -191,7 +266,7 @@ namespace cab301 {
                         "\n5. Fencing Accessories\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    fencingTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 4:
                     Console.Write("Select a tool type: " +
@@ -203,7 +278,7 @@ namespace cab301 {
                         "\n6. Markers\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    measuringTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 5:
                     Console.Write("Select a tool type: " +
@@ -215,7 +290,7 @@ namespace cab301 {
                         "\n6. Floor Cleaning\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    cleaningTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 6:
                     Console.Write("Select a tool type: " +
@@ -227,7 +302,7 @@ namespace cab301 {
                         "\n6. Sprayers\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    paintingTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 7:
                     Console.Write("Select a tool type: " +
@@ -238,7 +313,7 @@ namespace cab301 {
                         "\n5. Insulation Testers\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    electronicTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 8:
                     Console.Write("Select a tool type: " +
@@ -249,7 +324,7 @@ namespace cab301 {
                         "\n5. Cable Tools\n");
                     Console.Write("Enter your tool type (in string): ");
                      typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    electricityTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 case 9:
                     Console.Write("Select a tool type: " +
@@ -261,7 +336,7 @@ namespace cab301 {
                         "\n6. Drivetrain\n");
                     Console.Write("Enter your tool type (in string): ");
                     typeSelection = Convert.ToString(Console.ReadLine());
-                    gardeningTools.TryGetValue(typeSelection, out currentCollection);
+                    automotiveTools.TryGetValue(typeSelection, out currentCollection);
                     break;
                 default:
                     Console.WriteLine("Invalid Input, try again:");

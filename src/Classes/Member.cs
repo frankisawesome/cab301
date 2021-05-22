@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace cab301
 {
@@ -12,12 +13,19 @@ namespace cab301
 
     public string PIN { get; set; }
 
-    private string[] _tools;
+    private List<iTool> tools;
     public string[] Tools {
-      get => _tools;
+      get {
+        string[] toolsString = new string[tools.Count];
+        for (int i = 0; i < tools.Count; i++){
+          toolsString[i] = tools[i].ToString();
+        }
+        return toolsString;
+      }
     }
 
     public Member (string first, string last, string contact, string pin) {
+      tools = new List<iTool> ();
       this.FirstName = first;
       this.LastName = last;
       this.ContactNumber = contact;
@@ -25,11 +33,11 @@ namespace cab301
     }
 
     public void addTool (iTool tool) {
-
+      tools.Add(tool);
     }
 
     public void deleteTool (iTool tool) {
-
+      tools.Remove(tool);
     }
 
     //implement IComparable
@@ -48,7 +56,7 @@ namespace cab301
     //return a string containing the first name, lastname, and contact phone number of this memeber
     override public string ToString()
     {
-      return "";
+      return "Name: " + FirstName + " " + LastName + " Contact: " + ContactNumber;
     }      
   }
 }

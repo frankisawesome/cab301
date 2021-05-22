@@ -32,7 +32,7 @@ namespace cab301
             set;
         }
 
-        iMemberCollection GetBorrowers  //get all the members who are currently holding this tool
+        List<iMember> GetBorrowers  //get all the members who are currently holding this tool
         {
             get;
         }

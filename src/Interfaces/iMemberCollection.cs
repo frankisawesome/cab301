@@ -18,7 +18,7 @@ namespace cab301
         void delete(iMember aMember); //delete a given member from this member collection, a member can be deleted only when the member currently is not holding any tool
 
         //this is modified as returning a bool rather than the actual item makes 0 sense
-        iMember search(iMember aMember); //search a given member in this member collection. Return true if this memeber is in the member collection; return false otherwise.
+        Member search(iMember aMember); //search a given member in this member collection. Return true if this memeber is in the member collection; return false otherwise.
 
         iMember[] toArray(); //output the memebers in this collection to an array of iMember
     }
