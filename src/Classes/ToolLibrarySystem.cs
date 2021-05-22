@@ -68,10 +68,20 @@ namespace cab301 {
             currentCollection.add(tool);
         } 
         public void add (iMember member) {
-
+            iMember searchResult = members.search(member);
+            if (searchResult == null) {
+                members.add(member);
+            } else {
+                throw new Exception ("Member already exists");
+            }
         }
         public void delete (iMember member) {
-
+            iMember searchResult = members.search(member);
+            if (searchResult != null) {
+                members.delete(member);
+            } else {
+                throw new Exception ("Member doesnt' exist");
+            }
         }
         public void displayBorrowingTools (iMember member) {
 
@@ -86,6 +96,15 @@ namespace cab301 {
                 Console.WriteLine((i + 1) + ". " + tools[i].Name);
                 Console.WriteLine("Quantity: " + tools[i].Quantity.ToString());
                 Console.WriteLine("Available: " + tools[i].AvailableQuantity.ToString() + "\n");
+            }
+        }
+
+        public void printContat (string firstName, string lastName) {
+            iMember member = members.search(new Member(firstName, lastName, "", ""));
+            if (member == null) {
+                Console.WriteLine("Member not found!");
+            } else {
+                Console.WriteLine("Contact Number of " + firstName + ": " + member.ContactNumber);
             }
         }
         public void borrowTool (iMember member, iTool tool) {

@@ -22,8 +22,9 @@ namespace cab301 {
             number --;
         }
 
-        public Boolean search (iMember member) {
-            return membersTree.Search(member);
+        public iMember search (iMember member) {
+			//forgive these unsightly casts, they're to make up my inability to make generics work..
+            return (iMember)membersTree.Search(member);
         }  
 
         public iMember[] toArray() {
@@ -78,17 +79,17 @@ namespace cab301 {
 			return root == null;
 		}
 
-		public Boolean Search(IComparable item)
+		public IComparable Search(IComparable item)
 		{
 			return Search(item, root);
 		}
 
-		private bool Search(IComparable item, BTreeNode r)
+		private IComparable Search(IComparable item, BTreeNode r)
 		{
 			if(r != null)
 			{
 				if(item.CompareTo(r.Item) == 0)
-					return true;
+					return r.Item;
 				else
 					if(item.CompareTo(r.Item) < 0 )
 					return Search(item, r.LChild);
@@ -96,7 +97,7 @@ namespace cab301 {
 					return Search(item, r.RChild);
 			}
 			else
-				return false;
+				return null;
 		}
 
 		public void Insert(IComparable item)

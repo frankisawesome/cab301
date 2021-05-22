@@ -9,6 +9,7 @@ namespace cab301 {
             library = new ToolLibrarySystem();
         }
 
+        //this is the main menu and the default entry point
         public void level1() {
             Console.Clear();
             string welcomeMessage = @"Wecome to the Tool Library
@@ -59,6 +60,7 @@ namespace cab301 {
             }
         }
 
+        //this is just a primitive static method to fake as a login, since it's not our focus.
         static Boolean staffLogin() {
             Console.WriteLine("Enter your username:");
             string enteredUsername = Console.ReadLine();
@@ -69,6 +71,9 @@ namespace cab301 {
             return enteredUsername == "staff" && enteredPassword == "today123";
         }
 
+        //this is a very nasty method, but I don't see how I can avoid it
+        //can potentially turn some the menu controllers into static method
+        //however that feels quite pointless since they can't be reused.
         private void staffMenu() {
             Console.Write(@"
             Welcome to the Tool Lirary
@@ -92,10 +97,10 @@ namespace cab301 {
                         string toolName = Convert.ToString(Console.ReadLine());
                         library.add(new Tool(toolName));
                         Console.WriteLine("Success!");
-                        staffMenu();
+                        staffResults();
                     } catch (Exception e) {
                         Console.WriteLine("Action failed! Error: " + e);
-                        staffMenu();
+                        staffResults();
                     }
                     break;
                 case 2:
@@ -108,10 +113,10 @@ namespace cab301 {
                         int toolCount = Convert.ToInt16(Console.ReadLine());
                         library.add(new Tool(toolName), toolCount);
                         Console.WriteLine("Success!");
-                        staffMenu();
+                        staffResults();
                     } catch (Exception e) {
                         Console.WriteLine("Action failed! Error: " + e);
-                        staffMenu();
+                        staffResults();
                     }
                     break;
                 case 3:
@@ -122,10 +127,57 @@ namespace cab301 {
                         string toolName = Convert.ToString(Console.ReadLine());
                         library.delete(new Tool(toolName));
                         Console.WriteLine("Success!");
-                        staffMenu();
+                        staffResults();
                     } catch (Exception e) {
                         Console.WriteLine("Action failed! Error: " + e);
-                        staffMenu();
+                        staffResults();
+                    }
+                    break;
+                case 4:
+                    try {
+                        Console.WriteLine("Enter first name: ");
+                        string firstName = Convert.ToString(Console.ReadLine());
+                        Console.WriteLine("Enter last name: ");
+                        string lastName = Convert.ToString(Console.ReadLine());
+                        Console.WriteLine("Enter contact number: ");
+                        string contact = Convert.ToString(Console.ReadLine());
+                        Console.WriteLine("Enter pin code: ");
+                        string pin = Convert.ToString(Console.ReadLine());
+                        library.add(new Member(firstName, lastName, contact, pin));
+                        Console.WriteLine("Success!");
+                        staffResults();
+                    } catch (Exception e) {
+                        Console.WriteLine("Action failed! Error: " + e);
+                        staffResults();
+                    }
+                    break;
+                case 5:
+                    try {
+                        Console.WriteLine("Enter first name: ");
+                        string firstName = Convert.ToString(Console.ReadLine());
+                        Console.WriteLine("Enter last name: ");
+                        string lastName = Convert.ToString(Console.ReadLine());
+                        //this works because member uses first and last name to compare
+                        library.delete(new Member(firstName, lastName, "", ""));
+                        Console.WriteLine("Success!");
+                        staffResults();
+                    } catch (Exception e) {
+                        Console.WriteLine("Action failed! Error: " + e);
+                        staffResults();
+                    }
+                    break;
+                case 6:
+                    try {
+                        Console.WriteLine("Enter first name: ");
+                        string firstName = Convert.ToString(Console.ReadLine());
+                        Console.WriteLine("Enter last name: ");
+                        string lastName = Convert.ToString(Console.ReadLine());
+                        //this works because member uses first and last name to compare
+                        library.printContat(firstName, lastName);
+                        staffResults();
+                    } catch (Exception e) {
+                        Console.WriteLine("Action failed! Error: " + e);
+                        staffResults();
                     }
                     break;
                 case 0:
@@ -137,6 +189,17 @@ namespace cab301 {
             }
         }
 
+        //take user back to menu after results are shown
+        private void staffResults () {
+            Console.WriteLine("Press any key to go back");
+            Console.ReadKey();
+            staffMenu();
+        }
+
+        private void memberResults () {
+            Console.WriteLine("Press any key to go back");
+            Console.ReadKey();
+        }
 
         private void member() {
 
