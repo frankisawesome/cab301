@@ -6,7 +6,8 @@ namespace cab301
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menu menu = new Menu();
+            menu.level1();
         }
     }
 }

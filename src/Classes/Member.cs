@@ -15,6 +15,13 @@ namespace cab301
       get => _tools;
     }
 
+    public Member (string first, string last, string contact, string pin) {
+      this.FirstName = first;
+      this.LastName = last;
+      this.ContactNumber = contact;
+      this.PIN = pin;
+    }
+
     public void addTool (iTool tool) {
 
     }

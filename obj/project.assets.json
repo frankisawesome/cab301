@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "/Users/frank/.nuget/packages/": {}
+    "/home/frank/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/frank/Desktop/cab301/cab301.csproj",
+      "projectUniqueName": "/home/frank/cab301/cab301.csproj",
       "projectName": "cab301",
-      "projectPath": "/Users/frank/Desktop/cab301/cab301.csproj",
-      "packagesPath": "/Users/frank/.nuget/packages/",
-      "outputPath": "/Users/frank/Desktop/cab301/obj/",
+      "projectPath": "/home/frank/cab301/cab301.csproj",
+      "packagesPath": "/home/frank/.nuget/packages/",
+      "outputPath": "/home/frank/cab301/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/frank/.nuget/NuGet/NuGet.Config"
+        "/home/frank/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -58,7 +58,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }

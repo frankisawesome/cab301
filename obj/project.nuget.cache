@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sKNF/VAjK5mAzU1RPvFFr+T+bzfDZ2G27mE1N4qW7Idz+vBoWZPhDWQWdyUML7z1hKGyIS6RwwJaFiBDjbGfbA==",
+  "dgSpecHash": "5vOM6liJQaJCMXXwMzXhQaQWNcLtwEPjGaWR97v2dZlbvnIO0MBgVjhFNIm86mfGM8pQ/Kt6qLJ39aM/WIoupg==",
   "success": true,
-  "projectFilePath": "/Users/frank/Desktop/cab301/cab301.csproj",
+  "projectFilePath": "/home/frank/cab301/cab301.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
