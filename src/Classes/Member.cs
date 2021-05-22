@@ -1,3 +1,5 @@
+using System;
+
 namespace cab301
 {
   class Member : iMember
@@ -30,10 +32,23 @@ namespace cab301
 
     }
 
+    //implement IComparable
+    public int CompareTo (object member) {
+      iMember castedMember = (iMember)member;
+      int compareLast = LastName.CompareTo(castedMember.LastName);
+
+      if (compareLast == 0) {
+        return FirstName.CompareTo(castedMember.FirstName);
+      } else {
+        return compareLast;
+      }
+    }
+
+    
     //return a string containing the first name, lastname, and contact phone number of this memeber
     override public string ToString()
     {
       return "";
-    }
+    }      
   }
 }

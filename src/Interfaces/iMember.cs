@@ -5,7 +5,7 @@ using System.Text;
 namespace cab301
 {
     //The specification of Member ADT
-    interface iMember
+    interface iMember: IComparable
     {
         
         string FirstName  //get and set the first name of this member

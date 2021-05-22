@@ -4,6 +4,10 @@ namespace cab301 {
 
         private iMemberCollection borrowers;
 
+        public Tool (string name) {
+            Name = name;
+        }
+
         public string Name { get; set; }
 
         public int Quantity { get; set; }

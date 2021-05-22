@@ -20,8 +20,8 @@ namespace cab301
 
         void displayBorrowingTools(iMember aMember); //given a member, display all the tools that the member are currently renting
 
-
-        void displayTools(string aToolType); // display all the tools of a tool type selected by a member
+        //this is modified as tool type is kept as a local state
+        void displayTools(); // display all the tools of a tool type selected by a member
 
         void borrowTool(iMember aMember, iTool aTool); //a member borrows a tool from the tool library
 
