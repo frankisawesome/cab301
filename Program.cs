@@ -2,12 +2,12 @@
 
 namespace cab301
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Menu menu = new Menu();
-            menu.level1();
-        }
+      Menu menu = new Menu();
+      menu.level1();
     }
+  }
 }
