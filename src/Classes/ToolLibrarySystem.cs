@@ -34,6 +34,10 @@ namespace cab301 {
             iTool[] tools = currentCollection.toArray();
             for (int i = 0; i < tools.Length; i++) {
                 if (tools[i].Name == tool.Name) {
+                    //guard against removing too many pieces of a tool
+                    if (quantity < 0 && tools[i].AvailableQuantity < quantity){
+                        throw new Exception ("Not enough to remove");
+                    }
                     tool.Quantity = tools[i].Quantity + quantity;
                     tool.NoBorrowings = tools[i].NoBorrowings;
                     tool.AvailableQuantity = tools[i].Quantity + quantity;

@@ -125,7 +125,9 @@ namespace cab301 {
                         library.displayTools();
                         Console.WriteLine("Type in the tool you're deleting");
                         string toolName = Convert.ToString(Console.ReadLine());
-                        library.delete(new Tool(toolName));
+                        Console.WriteLine("How many are you deleting? \n");
+                        int toolCount = Convert.ToInt16(Console.ReadLine());
+                        library.add(new Tool(toolName), 0 - toolCount);
                         Console.WriteLine("Success!");
                         staffResults();
                     } catch (Exception e) {

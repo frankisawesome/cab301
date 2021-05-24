@@ -18,7 +18,7 @@ namespace cab301
       get {
         string[] toolsString = new string[tools.Count];
         for (int i = 0; i < tools.Count; i++){
-          toolsString[i] = tools[i].ToString();
+          toolsString[i] = tools[i].Name;
         }
         return toolsString;
       }
